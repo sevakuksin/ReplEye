@@ -1,0 +1,50 @@
+<annotation>
+	<folder>Photos-001</folder>
+	<filename>img (18).jpg</filename>
+	<path>/home/kuksin_seva/Repleye/Data/Photos-001/img (18).jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4000</width>
+		<height>3000</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>vial</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1155</xmin>
+			<ymin>1</ymin>
+			<xmax>2762</xmax>
+			<ymax>2529</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>vial</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>2762</xmin>
+			<ymin>1</ymin>
+			<xmax>4000</xmax>
+			<ymax>2519</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>vial</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>14</xmin>
+			<ymin>5</ymin>
+			<xmax>1200</xmax>
+			<ymax>2515</ymax>
+		</bndbox>
+	</object>
+</annotation>
