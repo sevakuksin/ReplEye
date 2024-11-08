@@ -1,9 +1,9 @@
 import os
-import xml.etree.ElementTree as ET
+import xml.etree.ElementTree as Etree
 
 
 def convert_voc_to_yolo(xml_file, classes, output_folder):
-    tree = ET.parse(xml_file)
+    tree = Etree.parse(xml_file)
     root = tree.getroot()
     image_width = int(root.find('size/width').text)
     image_height = int(root.find('size/height').text)
@@ -31,12 +31,12 @@ def convert_voc_to_yolo(xml_file, classes, output_folder):
             f.write(f"{class_id} {x_center} {y_center} {width} {height}\n")
 
 
-# Usage example
-classes = ["vial"]  # Update this list with your class names
-xml_folder = "Data/Screenshots_labeled"
-output_folder = "Annotations"
-os.makedirs(output_folder, exist_ok=True)
-
-for xml_file in os.listdir(xml_folder):
-    if xml_file.endswith(".xml"):
-        convert_voc_to_yolo(os.path.join(xml_folder, xml_file), classes, output_folder)
+# Usage
+# classes = ["vial"]  # Update this list with your class names
+# xml_folder = "data/annotations"
+# output_folder = "annotations"
+# os.makedirs(output_folder, exist_ok=True)
+#
+# for xml_file in os.listdir(xml_folder):
+#     if xml_file.endswith(".xml"):
+#         convert_voc_to_yolo(os.path.join(xml_folder, xml_file), classes, output_folder)
