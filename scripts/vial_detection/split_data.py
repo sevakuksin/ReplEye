@@ -73,7 +73,7 @@ def background(background_dir, base_dir, num_files=2):
 # Parameters
 if __name__ == "__main__":
     annotations_dir = "../annotations/vials"  # Path to your original images and XML files
-    base_dir = "../data"  # Base directory where train/val folders will be created
+    base_dir = "../../data"  # Base directory where train/val folders will be created
 
     # Run the script
     split_data(annotations_dir, base_dir, classes=["vial"], train_ratio=0.8)
