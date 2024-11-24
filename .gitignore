@@ -1,0 +1,7 @@
+# ignore any annotations folder and its contents, as well as data files
+**/data/
+**/annotations/
+**/annotations_simulated/
+**/runs/
+**/videos
+saved_images/

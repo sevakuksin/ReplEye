@@ -1,6 +1,0 @@
-# config/dataset.yaml
-train: ../data/train/images
-val: ../data/val/images
-
-nc: 1  # Number of classes (adjust as needed)
-names: ['vial']  # Class names
