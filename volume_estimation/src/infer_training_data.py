@@ -15,7 +15,7 @@ output_dir = '../annotations/'  # Directory to save isolated vial images
 os.makedirs(output_dir, exist_ok=True)
 
 # CSV setup
-csv_file = os.path.join(output_dir, 'annotations.csv')
+csv_file = os.path.join(output_dir, 'volume_labels.csv')
 annotations = []
 
 # Process each image in the input directory
@@ -35,6 +35,10 @@ for image_file in os.listdir(input_dir):
             xmin, ymin, xmax, ymax, conf, cls = det.tolist()
             xmin, ymin, xmax, ymax = int(xmin), int(ymin), int(xmax), int(ymax)
 
+            # Skip detections with low confidence
+            if conf < 0.6:
+                continue
+
             # Crop and save detected vial
             vial_img = img[ymin:ymax, xmin:xmax]
             vial_name = f"{Path(image_file).stem}_vial{idx}.png"
@@ -46,7 +50,7 @@ for image_file in os.listdir(input_dir):
 
             # Add annotation to list
             annotations.append({
-                'vial_image': vial_name,
+                'filename': vial_name,
                 'original_image': image_file,
                 'xmin': xmin,
                 'ymin': ymin,

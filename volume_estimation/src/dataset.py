@@ -32,9 +32,11 @@ class VolumeDataset(Dataset):
     def __getitem__(self, idx):
         if torch.is_tensor(idx):
             idx = idx.tolist()
-
+        # print(idx)
         img_name = os.path.join(self.root_dir, self.image_files[idx])
         image = Image.open(img_name).convert("RGB")
+        # print(self.image_files[idx])
+        # print(self.labels_df.loc[self.labels_df['filename'] == self.image_files[idx], 'volume'])
         volume = self.labels_df.loc[self.labels_df['filename'] == self.image_files[idx], 'volume'].values[0]
         volume = torch.tensor(volume, dtype=torch.float32)
 

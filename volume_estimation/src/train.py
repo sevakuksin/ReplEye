@@ -40,4 +40,4 @@ if __name__ == "__main__":
     model = VolumeEstimator()
     train_loader = DataLoader(VolumeDataset(train_dir, labels, train_transforms), batch_size=8, shuffle=True)
     val_loader = DataLoader(VolumeDataset(val_dir, labels, val_transforms), batch_size=8)
-    train_model(model, train_loader, val_loader, epochs=150, learning_rate=5e-4, save_path=save_path)
+    train_model(model, train_loader, val_loader, epochs=60, learning_rate=1e-4, save_path=save_path)

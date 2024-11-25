@@ -38,4 +38,4 @@ def split_data(annotations_dir, base_dir, volume_labels='volume_labels.csv', tra
 if __name__ == "__main__":
     annotations_dir = os.path.abspath("../annotations")
     base_dir = os.path.abspath("../data")
-    split_data(annotations_dir, base_dir)
+    split_data(annotations_dir, base_dir, volume_labels='volume_labels.csv', train_ratio=0.8)
