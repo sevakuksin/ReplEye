@@ -9,6 +9,8 @@ setup(
         "torch",
         "opencv-python",
         "numpy",
+        "torchvision",
+        "pandas"
         # Don't include picamera2 unless targeting Raspberry Pi
     ]
 )

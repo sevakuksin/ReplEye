@@ -1,16 +1,12 @@
 import cv2
 import torch
 import time
-import sys
-import os
 
 try:
     from picamera2 import Picamera2
 except ImportError:
     Picamera2 = None
 
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from repleye.analyze import analyze_image # adjust import as needed
 from repleye.volume_estimation.src.model import VolumeEstimator
@@ -21,8 +17,15 @@ if Picamera2 is None:
 
 def stream():
     # Load models once
-    yolo_weights = 'vial_detection/models/model_03_05_25.pt'
-    volume_weights = 'volume_estimation/models/model_2024_11_24.pth'
+    import importlib.resources as pkg_resources
+    from repleye.vial_detection import models as vial_models
+    from repleye.volume_estimation import models as vol_models
+
+    with pkg_resources.path(vial_models, "model_03_05_25.pt") as yolo_path:
+        yolo_weights = str(yolo_path)
+
+    with pkg_resources.path(vol_models, "model_2024_11_24.pth") as vol_path:
+        volume_weights = str(vol_path)
 
     yolo_model = torch.hub.load('ultralytics/yolov5', 'custom', path=yolo_weights)
     yolo_model.eval()
