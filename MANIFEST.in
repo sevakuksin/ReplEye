@@ -1,0 +1,5 @@
+# MANIFEST.in
+
+recursive-include repleye *.pt
+recursive-include repleye *.pth
+recursive-include repleye *.yaml

@@ -58,7 +58,7 @@ if __name__ == "__main__":
     train_dir = '../data/train'
     val_dir = '../data/val'
     labels = '../data/volume_labels.csv'
-    run = 'run1'
+    run = 'run2'
     save_run = f'../runs/train/{run}/'
     # Create a run directory
     os.makedirs(save_run, exist_ok=True)
@@ -66,7 +66,7 @@ if __name__ == "__main__":
     model = VolumeEstimator()
     train_loader = DataLoader(VolumeDataset(train_dir, labels, train_transforms), batch_size=8, shuffle=True)
     val_loader = DataLoader(VolumeDataset(val_dir, labels, val_transforms), batch_size=8)
-    losses = train_model(model, train_loader, val_loader, epochs=70, learning_rate=1e-4, run=save_run)
+    losses = train_model(model, train_loader, val_loader, epochs=100, learning_rate=1e-4, run=save_run)
 
     # Save losses in a text file
     with open(save_run + 'losses.txt', 'w') as f:

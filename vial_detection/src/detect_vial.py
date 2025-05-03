@@ -3,7 +3,7 @@ import torch
 import numpy as np
 # from pathlib import Path
 
-def detect(image_path_or_image, weights, confidence_threshold=0.6, model=None):
+def detect(image_path_or_image, weights, confidence_threshold=0.4, model=None):
     """
     Detects objects in an image using a YOLOv5 model.
 

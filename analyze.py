@@ -1,19 +1,21 @@
+import cv2
 import torch
 
 from vial_detection import detect_vial
 from volume_estimation import estimate
 from volume_estimation.src.model import VolumeEstimator
-import cv2
+
+
 # from PIL import Image
 
 
-def analyze_image(image_path, yolo_weights, volume_weights, yolo_model=None, volume_model=None):
+def analyze_image(image, yolo_weights, volume_weights, yolo_model=None, volume_model=None):
     """
     Analyze an image to detect vials and estimate their volumes.
 
     Args:
-        image_path: str
-            Path to the input image.
+        image: str or ndarray or tensor
+            Path to the input image or the image itself.
         yolo_weights: str
             Path to the YOLO weights for vial detection.
         volume_weights: str
@@ -29,7 +31,7 @@ def analyze_image(image_path, yolo_weights, volume_weights, yolo_model=None, vol
             (bounding box, volume estimate, and position).
     """
     # Detect vials in the image
-    vials = detect_vial.detect(image_path, yolo_weights, model=yolo_model)  # Returns list of annotations
+    vials = detect_vial.detect(image, yolo_weights, model=yolo_model)  # Returns list of annotations
 
     # Sort vials from left to right by the horizontal center of the bounding box
     sorted_vials = sorted(vials, key=lambda vial: (vial['xmin'] + vial['xmax']) / 2)
@@ -38,7 +40,7 @@ def analyze_image(image_path, yolo_weights, volume_weights, yolo_model=None, vol
     results = []
     for vial in sorted_vials:
         # Crop the vial image using bbox coordinates (if needed for volume estimation)
-        vial_image = extract_vial_image(image_path, vial)
+        vial_image = extract_vial_image(image, vial)
 
         # Estimate volume
         volume = estimate.estimate_volume(vial_image, volume_weights, volume_model)
@@ -53,13 +55,13 @@ def analyze_image(image_path, yolo_weights, volume_weights, yolo_model=None, vol
     return results
 
 
-def extract_vial_image(image_path, bbox):
+def extract_vial_image(image, bbox):
     """
     Extract a cropped image of the vial based on the bounding box.
 
     Args:
-        image_path: str
-            Path to the input image.
+        image: str or ndarray or tensor
+            Path to the input image or the image itself.
         bbox: Dict
             A dictionary containing bbox coordinates: xmin, ymin, xmax, ymax.
 
@@ -69,8 +71,12 @@ def extract_vial_image(image_path, bbox):
     """
 
     # Load the image
-    img = cv2.imread(image_path)
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    if isinstance(image, str):
+        img = cv2.imread(image)
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    else:
+        img = image
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
     # Extract bounding box coordinates
     xmin, ymin, xmax, ymax = bbox['xmin'], bbox['ymin'], bbox['xmax'], bbox['ymax']
@@ -84,7 +90,7 @@ def extract_vial_image(image_path, bbox):
 
 
 if __name__ == "__main__":
-    image_path = 'volume_estimation/annotations_simulated/ExtrusionHeight_22.0mm_1_offset.png'
+    image_path = 'vial_detection/annotations/vials/5_1.jpeg'
     yolo_weights = 'vial_detection/runs/train/exp_augmented_glass2/weights/best.pt'
     volume_weights = 'volume_estimation/models/model_2024_11_24.pth'
 

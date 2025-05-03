@@ -1,4 +1,5 @@
 # ignore any annotations folder and its contents, as well as data files
+.idea/
 **/data/
 **/annotations/
 **/annotations_simulated/
