@@ -10,10 +10,5 @@ setup(
         "opencv-python",
         "numpy",
         # Don't include picamera2 unless targeting Raspberry Pi
-    ],
-    extras_require={
-        "raspberry": [
-            "git+https://github.com/raspberrypi/picamera2.git"
-        ]
-    }
+    ]
 )
