@@ -73,10 +73,21 @@ def process_video(input_video, output_video, yolo_weights, volume_weights):
     print("Video processing complete. Output saved to:", output_video)
 
 
-if __name__ == "__main__":
-    input_video = 'vial_detection/videos/video_2.mp4'  # Path to input video
-    output_video = 'output_video_2_1.avi'  # Path to save annotated video
-    yolo_weights = 'vial_detection/runs/train/exp_augmented_glass2/weights/best.pt'
-    volume_weights = 'volume_estimation/models/model_2024_11_24.pth'
+import argparse
 
-    process_video(input_video, output_video, yolo_weights, volume_weights)
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Process video for vial detection and volume estimation.")
+    parser.add_argument("--input_video", required=True, help="Path to input video")
+    parser.add_argument("--output_video", required=True, help="Path to save annotated video")
+    parser.add_argument("--yolo_weights", required=True, help="Path to YOLOv5 weights")
+    parser.add_argument("--volume_weights", required=True, help="Path to volume estimation model")
+
+    args = parser.parse_args()
+
+    process_video(
+        input_video=args.input_video,
+        output_video=args.output_video,
+        yolo_weights=args.yolo_weights,
+        volume_weights=args.volume_weights
+    )
+
