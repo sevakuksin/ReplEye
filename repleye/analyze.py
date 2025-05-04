@@ -1,9 +1,9 @@
 import cv2
 import torch
 
-from vial_detection import detect_vial
-from volume_estimation import estimate
-from volume_estimation.src.model import VolumeEstimator
+from repleye.vial_detection import detect_vial
+from repleye.volume_estimation.src import estimate
+from repleye.volume_estimation.src.model import VolumeEstimator
 
 
 # from PIL import Image

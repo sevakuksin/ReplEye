@@ -1,7 +1,7 @@
 import cv2
 import torch
-from analyze import analyze_image
-from volume_estimation.src.model import VolumeEstimator
+from repleye.analyze import analyze_image
+from repleye.volume_estimation.src.model import VolumeEstimator
 
 
 def process_video(input_video, output_video, yolo_weights, volume_weights):

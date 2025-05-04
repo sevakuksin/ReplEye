@@ -6,11 +6,8 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        "torch",
         "opencv-python",
-        "numpy",
-        "torchvision",
-        "pandas"
+        "numpy"
         # Don't include picamera2 unless targeting Raspberry Pi
     ]
 )
