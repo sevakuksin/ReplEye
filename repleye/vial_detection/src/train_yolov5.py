@@ -3,16 +3,17 @@ import os
 import sys
 
 # weights = "yolov5s.pt"
-weights = "vial_detection/runs/train/new_data/weights/best.pt"
+weights = "yolov5n.pt"
 
 # Define arguments
 args = [
     sys.executable, "yolov5/train.py",
     "--img", "640",
-    "--batch", "4",
-    "--epochs", "60",
+    "--batch", "16",
+    "--epochs", "100",
     "--data", "vial_detection/config/dataset.yaml",
     "--weights", weights,
+    "--cfg", "vial_detection/config/yolov5n.yaml",
     "--project", "vial_detection/runs/train",
     "--name", "new_data",
     "--cache", "disk",
@@ -20,6 +21,6 @@ args = [
 ]
 
 # Change directory to vial_detection root
-os.chdir('../../../')
+os.chdir('../../')
 # Run YOLOv5 training with subprocess
 subprocess.run(args)

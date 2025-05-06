@@ -91,4 +91,4 @@ if __name__ == "__main__":
 
     # Randomly choose 2 background files for each training and validation data
     background_dir = "../annotations/background"
-    background(background_dir, base_dir, num_files=10, train_ratio=0.8)
+    background(background_dir, base_dir, num_files=37, train_ratio=0.8)

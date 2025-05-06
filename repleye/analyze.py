@@ -88,9 +88,9 @@ def extract_vial_image(image, bbox):
     # Crop the image
     return img[ymin:ymax, xmin:xmax]
 
-
+#%%
 if __name__ == "__main__":
-    image_path = 'vial_detection/annotations/vials/5_1.jpeg'
+    image_path = 'vial_detection/data/train/images/17_0.jpeg'
     yolo_weights = 'vial_detection/runs/train/exp_augmented_glass2/weights/best.pt'
     volume_weights = 'volume_estimation/models/model_2024_11_24.pth'
 
@@ -99,7 +99,29 @@ if __name__ == "__main__":
     volume_model.load_state_dict(torch.load(volume_weights))
     volume_model.eval()
 
+    # Load the image
+    frame_rgb = cv2.imread(image_path)
+    # convert to RGB
+    # frame_rgb = cv2.cvtColor(frame_rgb, cv2.COLOR_BGR2RGB)
+
     results = analyze_image(image_path, yolo_weights, volume_weights, yolo_model, volume_model)
+
+    for result in results:
+        bbox = result['bbox']
+        x1, y1, x2, y2 = bbox['xmin'], bbox['ymin'], bbox['xmax'], bbox['ymax']
+        volume = result['volume']
+
+        # Draw the bounding box
+        cv2.rectangle(frame_rgb, (x1, y1), (x2, y2), (0, 255, 0), 2)
+
+        # Draw the volume label
+        label = f"{volume:.2f} ml"
+        label_position = (x1, y2 + 55)
+        cv2.putText(frame_rgb, label, label_position, cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 2)
+
+    # Save the annotated image
+    cv2.imwrite('output_image.jpg', frame_rgb)
 
     for idx, result in enumerate(results):
         print(f"Vial {idx + 1}: Volume = {result['volume']:.2f} ml, Center X = {result['center_x']}")
+
