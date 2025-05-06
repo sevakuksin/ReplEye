@@ -1,6 +1,6 @@
 # config/dataset.yaml
-train: ../../Repleye/vial_detection/data/train/images
-val: ../../vial_detection/data/val/images
+train: ../vial_detection/data/train/images
+val: ../vial_detection/data/val/images
 
 nc: 1  # Number of classes (adjust as needed)
 names: ['vial']  # Class names

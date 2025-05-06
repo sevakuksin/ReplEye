@@ -1,5 +1,10 @@
 import cv2
 import torch
+import os
+import sys
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from repleye.analyze import analyze_image
 from repleye.volume_estimation.src.model import VolumeEstimator
 
@@ -76,6 +81,9 @@ def process_video(input_video, output_video, yolo_weights, volume_weights):
 import argparse
 
 if __name__ == "__main__":
+    """
+    python analyze_video.py --input_video ../Handmade/train_2.mp4 --output_video ../Handmade/output_train_2.mp4 --yolo_weights vial_detection/models/06_05_2025.pt --volume_weights volume_estimation/models/model_2024_11_24.pth
+    """
     parser = argparse.ArgumentParser(description="Process video for vial detection and volume estimation.")
     parser.add_argument("--input_video", required=True, help="Path to input video")
     parser.add_argument("--output_video", required=True, help="Path to save annotated video")
