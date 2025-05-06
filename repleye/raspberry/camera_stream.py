@@ -93,7 +93,37 @@ def get_frame():
 
 @app.route('/')
 def index():
-    return '<html><body><img src="/stream" width="640" height="480"></body></html>'
+    return '''
+    <html>
+    <head>
+        <title>ReplEye Camera Stream</title>
+        <style>
+            body {
+                background-color: #1e1e1e;
+                color: white;
+                font-family: Arial, sans-serif;
+                text-align: center;
+                padding: 20px;
+            }
+            h1 {
+                margin-bottom: 20px;
+            }
+            img {
+                border: 5px solid #4caf50;
+                border-radius: 10px;
+                box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+                width: 640px;
+                height: 480px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>🔬 ReplEye Vial Stream</h1>
+        <img src="/stream" alt="Live Stream">
+        <p>Monitoring vial volumes in real-time...</p>
+    </body>
+    </html>
+    '''
 
 @app.route('/stream')
 def stream():
